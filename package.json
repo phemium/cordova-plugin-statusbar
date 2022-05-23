@@ -1,10 +1,10 @@
 {
   "name": "@phemium-costaisa/cordova-plugin-statusbar",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Cordova StatusBar Plugin",
   "types": "./types/index.d.ts",
   "cordova": {
-    "id": "@phemium-costaisa/cordova-plugin-statusbar",
+    "id": "@phemium-costaisa/cordova-plugin-statusbaar",
     "platforms": [
       "android",
       "ios",
