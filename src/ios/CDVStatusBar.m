@@ -150,7 +150,6 @@ static const void *kStatusBarStyle = &kStatusBarStyle;
     } else {
         self.webView.scrollView.scrollsToTop = NO;
     }
- 
     // blank scroll view to intercept status bar taps
     UIScrollView *fakeScrollView = [[UIScrollView alloc] initWithFrame:UIScreen.mainScreen.bounds];
     fakeScrollView.delegate = self;
@@ -211,8 +210,9 @@ static const void *kStatusBarStyle = &kStatusBarStyle;
         // correct frame's coordinates
         statusBarFrame.origin.y = 0;
     }
-
+    statusBarFrame.size.height = [self.viewController.view.window bounds].size.height;
     _statusBarBackgroundView = [[UIView alloc] initWithFrame:statusBarFrame];
+    _statusBarBackgroundView.userInteractionEnabled = false;
     _statusBarBackgroundView.backgroundColor = _statusBarBackgroundColor;
     _statusBarBackgroundView.autoresizingMask = (UIViewAutoresizingFlexibleWidth  | UIViewAutoresizingFlexibleBottomMargin);
     _statusBarBackgroundView.autoresizesSubviews = YES;
@@ -449,6 +449,7 @@ static const void *kStatusBarStyle = &kStatusBarStyle;
 
     CGRect statusBarFrame = [UIApplication sharedApplication].statusBarFrame;
     CGRect frame = self.webView.frame;
+    self.webView.layer.zPosition = 2;
     CGFloat height = statusBarFrame.size.height;
 
     if (!self.statusBarOverlaysWebView) {
