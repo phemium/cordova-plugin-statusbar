@@ -1,18 +1,17 @@
 {
-  "name": "cordova-plugin-statusbar",
-  "version": "3.0.1-dev",
+  "name": "@phemium-costaisa/cordova-plugin-statusbar",
+  "version": "3.0.2",
   "description": "Cordova StatusBar Plugin",
   "types": "./types/index.d.ts",
   "cordova": {
-    "id": "cordova-plugin-statusbar",
+    "id": "@phemium-costaisa/cordova-plugin-statusbar",
     "platforms": [
       "android",
       "ios",
       "windows"
     ]
   },
-  "repository": "github:apache/cordova-plugin-statusbar",
-  "bugs": "https://github.com/apache/cordova-plugin-statusbar/issues",
+  "repository": "github:phemium/cordova-plugin-statusbar",
   "keywords": [
     "cordova",
     "statusbar",

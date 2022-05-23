@@ -20,8 +20,8 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    id="cordova-plugin-statusbar"
-    version="3.0.1-dev">
+    id="@phemium-costaisa/cordova-plugin-statusbar"
+    version="3.0.2">
     <name>StatusBar</name>
     <description>Cordova StatusBar Plugin</description>
     <license>Apache 2.0</license>

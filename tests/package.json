@@ -1,9 +1,9 @@
 {
-  "name": "cordova-plugin-statusbar-tests",
-  "version": "3.0.1-dev",
+  "name": "@phemium-costaisa/cordova-plugin-statusbar-tests",
+  "version": "3.0.2",
   "description": "",
   "cordova": {
-    "id": "cordova-plugin-statusbar-tests",
+    "id": "@phemium-costaisa/cordova-plugin-statusbar-tests",
     "platforms": []
   },
   "keywords": [

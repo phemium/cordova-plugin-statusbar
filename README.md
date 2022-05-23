@@ -2,6 +2,7 @@
 title: Statusbar
 description: Control the device status bar.
 ---
+
 <!---
 # license: Licensed to the Apache Software Foundation (ASF) under one
 #         or more contributor license agreements.  See the NOTICE file
@@ -31,81 +32,78 @@ description: Control the device status bar.
 
 This installation method requires cordova 5.0+
 
-    cordova plugin add cordova-plugin-statusbar
+    [ionic] cordova plugin add @phemium-costaisa/cordova-plugin-statusbar
 
 It is also possible to install via repo url directly ( unstable )
 
-    cordova plugin add https://github.com/apache/cordova-plugin-statusbar.git
+    [ionic] cordova plugin add https://github.com/phemium/cordova-plugin-statusbar.git
 
-
-Preferences
------------
+## Preferences
 
 #### config.xml
 
--  __StatusBarOverlaysWebView__ (boolean, defaults to true). Make the statusbar overlay or not overlay the WebView at startup.
+- **StatusBarOverlaysWebView** (boolean, defaults to true). Make the statusbar overlay or not overlay the WebView at startup.
 
-        <preference name="StatusBarOverlaysWebView" value="true" />
+       <preference name="StatusBarOverlaysWebView" value="true" />
 
-    ##### Android Quirks
-    
-    Only supported on Android 5 or later. Earlier versions will ignore this preference.
+  ##### Android Quirks
 
-- __StatusBarBackgroundColor__ (color hex string, no default value). Set the background color of the statusbar by a hex string (#RRGGBB) at startup. If this value is not set, the background color will be transparent. If `StatusBarOverlaysWebView` is set to true, then a 8 digit hex (#AARRGGBB) string can optionally be used to define the transparency.
+  Only supported on Android 5 or later. Earlier versions will ignore this preference.
+
+- **StatusBarBackgroundColor** (color hex string, no default value). Set the background color of the statusbar by a hex string (#RRGGBB) at startup. If this value is not set, the background color will be transparent. If `StatusBarOverlaysWebView` is set to true, then a 8 digit hex (#AARRGGBB) string can optionally be used to define the transparency.
 
         <preference name="StatusBarBackgroundColor" value="#000000" />
 
-- __StatusBarStyle__ (status bar style, defaults to lightcontent). Set the status bar style (e.g. text color). Available options: `default`, `lightcontent`. `blacktranslucent` and `blackopaque` are also available, but __deprecated__, will be removed in next major release, use `lightcontent` instead.
+- **StatusBarStyle** (status bar style, defaults to lightcontent). Set the status bar style (e.g. text color). Available options: `default`, `lightcontent`. `blacktranslucent` and `blackopaque` are also available, but **deprecated**, will be removed in next major release, use `lightcontent` instead.
 
         <preference name="StatusBarStyle" value="lightcontent" />
 
-- __StatusBarDefaultScrollToTop__ (boolean, defaults to false). On iOS, allows the Cordova WebView to use default scroll-to-top behavior. Defaults to false so you can listen to the "statusTap" event (described below) and customize the behavior instead.
+- **StatusBarDefaultScrollToTop** (boolean, defaults to false). On iOS, allows the Cordova WebView to use default scroll-to-top behavior. Defaults to false so you can listen to the "statusTap" event (described below) and customize the behavior instead.
 
         <preference name="StatusBarDefaultScrollToTop" value="false" />
 
 ### Android Quirks
+
 The Android 5+ guidelines specify using a different color for the statusbar than your main app color (unlike the uniform statusbar color of many iOS apps), so you may want to set the statusbar color at runtime instead via `StatusBar.backgroundColorByHexString` or `StatusBar.backgroundColorByName`. One way to do that would be:
+
 ```js
 if (cordova.platformId == 'android') {
-    StatusBar.backgroundColorByHexString("#333");
+  StatusBar.backgroundColorByHexString('#333');
 }
 ```
 
 It is also possible to make the status bar semi-transparent. Android uses hexadecimal ARGB values, which are formatted as #AARRGGBB. That first pair of letters, the AA, represent the alpha channel. You must convert your decimal opacity values to a hexadecimal value. You can read more about it [here](https://stackoverflow.com/questions/5445085/understanding-colors-on-android-six-characters/11019879#11019879).
 
 For example, a black status bar with 20% opacity:
+
 ```js
 if (cordova.platformId == 'android') {
-    StatusBar.overlaysWebView(true);
-    StatusBar.backgroundColorByHexString('#33000000');
+  StatusBar.overlaysWebView(true);
+  StatusBar.backgroundColorByHexString('#33000000');
 }
 ```
 
 ### iOS Quirks
+
 Starting with iOS 11 you must include `viewport-fit=cover` in your viewport meta tag if you want the status bar to overlay the webview:
 
 ```html
-<meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+<meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover" />
 ```
 
-
-
-Hiding at startup
------------
+## Hiding at startup
 
 During runtime you can use the StatusBar.hide function below, but if you want the StatusBar to be hidden at app startup on iOS, you must modify your app's Info.plist file.
 
 Add/edit these two attributes if not present. Set **"Status bar is initially hidden"** to **"YES"** and set **"View controller-based status bar appearance"** to **"NO"**. If you edit it manually without Xcode, the keys and values are:
 
+    <key>UIStatusBarHidden</key>
+    <true/>
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
 
-	<key>UIStatusBarHidden</key>
-	<true/>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
+## Methods
 
-
-Methods
--------
 This plugin defines global `StatusBar` object.
 
 Although in the global scope, it is not available until after the `deviceready` event.
@@ -125,108 +123,87 @@ Although in the global scope, it is not available until after the `deviceready` 
 - StatusBar.hide
 - StatusBar.show
 
-Properties
---------
+## Properties
 
 - StatusBar.isVisible
 
-Events
-------
+## Events
 
 - statusTap
 
-StatusBar.overlaysWebView
-=================
+# StatusBar.overlaysWebView
 
 Make the statusbar overlay or not overlay the WebView.
 
     StatusBar.overlaysWebView(true);
 
-Description
------------
+## Description
 
 Set to true to make the statusbar overlay on top of your app. Ensure that you adjust your styling accordingly so that your app's title bar or content is not covered. Set to false to make the statusbar solid and not overlay your app. You can then set the style and background color to suit using the other functions.
 
-
-Supported Platforms
--------------------
+## Supported Platforms
 
 - iOS
 - Android 5+
 
-Quick Example
--------------
+## Quick Example
 
     StatusBar.overlaysWebView(true);
     StatusBar.overlaysWebView(false);
 
-StatusBar.styleDefault
-=================
+# StatusBar.styleDefault
 
 Use the default statusbar (dark text, for light backgrounds).
 
     StatusBar.styleDefault();
 
-
-Supported Platforms
--------------------
+## Supported Platforms
 
 - iOS
 - Android 6+
 - Windows
 
-StatusBar.styleLightContent
-=================
+# StatusBar.styleLightContent
 
 Use the lightContent statusbar (light text, for dark backgrounds).
 
     StatusBar.styleLightContent();
 
-
-Supported Platforms
--------------------
+## Supported Platforms
 
 - iOS
 - Android 6+
 - Windows
 
-StatusBar.styleBlackTranslucent
-=================
+# StatusBar.styleBlackTranslucent
 
-Note: `styleBlackTranslucent` is __deprecated__ and will be removed in next major release, use `styleLightContent` instead.
+Note: `styleBlackTranslucent` is **deprecated** and will be removed in next major release, use `styleLightContent` instead.
 
 Use the blackTranslucent statusbar (light text, for dark backgrounds).
 
     StatusBar.styleBlackTranslucent();
 
-
-Supported Platforms
--------------------
+## Supported Platforms
 
 - iOS
 - Android 6+
 - Windows
 
-StatusBar.styleBlackOpaque
-=================
+# StatusBar.styleBlackOpaque
 
-Note: `styleBlackOpaque` is __deprecated__ and will be removed in next major release, use `styleLightContent` instead.
+Note: `styleBlackOpaque` is **deprecated** and will be removed in next major release, use `styleLightContent` instead.
 
 Use the blackOpaque statusbar (light text, for dark backgrounds).
 
     StatusBar.styleBlackOpaque();
 
-
-Supported Platforms
--------------------
+## Supported Platforms
 
 - iOS
 - Android 6+
 - Windows
 
-
-StatusBar.backgroundColorByName
-=================
+# StatusBar.backgroundColorByName
 
 On iOS, when you set StatusBar.overlaysWebView to false, you can set the background color of the statusbar by color name.
 
@@ -236,16 +213,13 @@ Supported color names are:
 
     black, darkGray, lightGray, white, gray, red, green, blue, cyan, yellow, magenta, orange, purple, brown
 
-
-Supported Platforms
--------------------
+## Supported Platforms
 
 - iOS
 - Android 5+
 - Windows
 
-StatusBar.backgroundColorByHexString
-=================
+# StatusBar.backgroundColorByHexString
 
 Sets the background color of the statusbar by a hex string.
 
@@ -260,45 +234,37 @@ On iOS, when you set StatusBar.overlaysWebView to false, you can set the backgro
 
 On Android, when StatusBar.overlaysWebView is true, and on WP7&8, you can also specify values as #AARRGGBB, where AA is an alpha value.
 
-Supported Platforms
--------------------
+## Supported Platforms
 
 - iOS
 - Android 5+
 - Windows
 
-StatusBar.hide
-=================
+# StatusBar.hide
 
 Hide the statusbar.
 
     StatusBar.hide();
 
-
-Supported Platforms
--------------------
+## Supported Platforms
 
 - iOS
 - Android
 - Windows
 
-StatusBar.show
-=================
+# StatusBar.show
 
 Shows the statusbar.
 
     StatusBar.show();
 
-
-Supported Platforms
--------------------
+## Supported Platforms
 
 - iOS
 - Android
 - Windows
 
-StatusBar.isVisible
-=================
+# StatusBar.isVisible
 
 Read this property to see if the statusbar is visible or not.
 
@@ -306,16 +272,13 @@ Read this property to see if the statusbar is visible or not.
     	// do something
     }
 
-
-Supported Platforms
--------------------
+## Supported Platforms
 
 - iOS
 - Android
 - Windows
 
-statusTap
-=========
+# statusTap
 
 Listen for this event to know if the statusbar was tapped.
 
@@ -323,8 +286,6 @@ Listen for this event to know if the statusbar was tapped.
         // scroll-up with document.body.scrollTop = 0; or do whatever you want
     });
 
-
-Supported Platforms
--------------------
+## Supported Platforms
 
 - iOS
